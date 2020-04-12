@@ -8,8 +8,9 @@ create table stream
     last_name        varchar(30)   not null,
     first_name       varchar(30)   not null,
     beginning        timestamp     not null,
-    "end"            timestamp     not null,
-    description      varchar(1000) not null
+    finish            timestamp     not null,
+    your_description      varchar(1000) not null,
+    link_to                varchar(100)  not null
 );
 
 alter table stream
