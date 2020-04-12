@@ -1,0 +1,24 @@
+{% extends "Layout.html" %}
+
+{% block content %}
+<table class="table table-bordered">
+<thead>
+<tr>
+    <th scope="col">Type </th>
+    <th scope="col">Nazwisko</th>
+    <th scope="col">Imię</th>
+</tr>
+</thead>
+<tbody>
+    {% for event in services %}
+<tr>
+    <td>{{ event['type_of_activity'] }}    </td>
+    <td>{{ event['last_name'] }}</td>
+    <td>{{ event['first_name']}}</td>
+</tr>
+        {% endfor %}
+</tbody>
+</table>
+
+
+{% endblock %}

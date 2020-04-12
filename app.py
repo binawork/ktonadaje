@@ -1,10 +1,12 @@
 from flask import Flask, render_template
+import data_manager
 app = Flask(__name__)
 
 
 @app.route('/')
 def index():
-    return render_template('Layout.html')
+    services = data_manager.get_all()
+    return render_template('Table.html', services=services)
 
 @app.route('/trenerzy_osobisci')
 def trenerzy_osobisci():
