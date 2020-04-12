@@ -1,7 +1,7 @@
 {% extends "Layout.html" %}
 
 {% block content %}
-<table class="table table-bordered">
+<table class="table table-bordered table-sm">
 <thead>
 <tr>
     <th scope="col">Type </th>
@@ -12,7 +12,7 @@
 <tbody>
     {% for event in services %}
 <tr>
-    <td>{{ event['type_of_activity'] }}    </td>
+    <td><a href="{{ event['link_to'] }}">{{ event['type_of_activity'] }}</a></td>
     <td>{{ event['last_name'] }}</td>
     <td>{{ event['first_name']}}</td>
 </tr>
