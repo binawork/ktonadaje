@@ -1,0 +1,35 @@
+{% extends 'Layout.html' %}
+
+{% block content %}
+    <form method="post">
+        <div class="form-group">
+            <label>Nazwa wydarzenia</label>
+            <input type="text" class="form-control" id="Name" placeholder="korepetycje">
+        </div>
+        <div class="form-group">
+            <label>Imie</label>
+            <input type="text" class="form-control" id="FirstName" placeholder="Jan">
+        </div>
+        <div class="form-group">
+            <label>Nazwisko</label>
+            <input type="text" class="form-control" id="Surname" placeholder="Kowalski">
+        </div>
+        <div class="form-group">
+            <label>Link</label>
+            <input type="text" class="form-control" id="Link" placeholder="www.KtoNadaje.pl">
+        </div>
+        <div class="form-group">
+            <label>Data</label>
+            <input type="date" class="form-control" id="Date" placeholder="2020-10-01">
+        </div>
+        <div class="form-group">
+            <label>Czas rozpoczecia</label>
+            <input type="time" class="form-control" id="Time" placeholder="10:00">
+        </div>
+        <div class="form-group">
+            <label>Czas zakonczenia</label>
+            <input type="time" class="form-control" id="Time" placeholder="10:00">
+        </div>
+    </form>
+
+{% endblock %}
