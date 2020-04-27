@@ -8,13 +8,13 @@
 </head>
 <body>
     <div class="navbar">
-        <a class="h3" href="{{ url_for('index') }}">KtoNadaje.pl</a>
-        <a class="h3">Jak streamować</a>
-        <a class="h3">O nas</a>
-        <a class="h3">Mój profil</a>
-        <a class="h3" href="{{ url_for('add_event') }}">Dodaj wydarzenie</a>
-        <a class="h3">Zaloguj</a>
-        <a class="h3" href="{{ url_for('register')}}">Rejestracja</a>
+        <a class="li-navbar-item" href="{{ url_for('index') }}">KtoNadaje.pl</a>
+        <a class="li-navbar-item">Jak streamować</a>
+        <a class="li-navbar-item">O nas</a>
+        <a class="li-navbar-item">Mój profil</a>
+        <a class="li-navbar-item" href="{{ url_for('add_event') }}">Dodaj wydarzenie</a>
+        <a class="li-navbar-item" href="{{url_for('login') }}">Zaloguj</a>
+        <a class="li-navbar-item" href="{{ url_for('register')}}">Rejestracja</a>
     </div>
     <div class="jumbotron">
         <h1 class="display-2">Ktonadaje.pl</h1>

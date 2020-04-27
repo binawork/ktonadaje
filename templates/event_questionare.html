@@ -1,35 +1,50 @@
 {% extends 'Layout.html' %}
 
 {% block content %}
+<div>
     <form method="post">
-        <div class="form-group">
-            <label>Nazwa wydarzenia</label>
-            <input type="text" class="form-control" id="Name" placeholder="korepetycje">
+        <div class="form-group row">
+            <div class="col-md-4 offset-md-4">
+                <label>Nazwa wydarzenia</label>
+                <input type="text" class="form-control" id="Name" placeholder="korepetycje">
+            </div>
         </div>
-        <div class="form-group">
-            <label>Imie</label>
-            <input type="text" class="form-control" id="FirstName" placeholder="Jan">
+        <div class="form-group row">
+            <div class="col-md-4 offset-md-4">
+                <label>Imie</label>
+                <input type="text" class="form-control" id="FirstName" placeholder="Jan">
+            </div>
         </div>
-        <div class="form-group">
-            <label>Nazwisko</label>
-            <input type="text" class="form-control" id="Surname" placeholder="Kowalski">
+        <div class="form-group row">
+            <div class="col-md-4 offset-md-4">
+                <label>Nazwisko</label>
+                <input type="text" class="form-control" id="Surname" placeholder="Kowalski">
+            </div>
         </div>
-        <div class="form-group">
-            <label>Link</label>
-            <input type="text" class="form-control" id="Link" placeholder="www.KtoNadaje.pl">
+        <div class="form-group row">
+            <div class="col-md-4 offset-md-4">
+                <label>Link</label>
+                <input type="text" class="form-control" id="Link" placeholder="www.KtoNadaje.pl">
+            </div>
         </div>
-        <div class="form-group">
-            <label>Data</label>
-            <input type="date" class="form-control" id="Date" placeholder="2020-10-01">
+        <div class="form-group row">
+            <div class="col-md-4 offset-md-4">
+                <label>Data</label>
+                <input type="date" class="form-control" id="Date" placeholder="2020-10-01">
+            </div>
         </div>
-        <div class="form-group">
-            <label>Czas rozpoczecia</label>
-            <input type="time" class="form-control" id="Time" placeholder="10:00">
-        </div>
-        <div class="form-group">
-            <label>Czas zakonczenia</label>
-            <input type="time" class="form-control" id="Time" placeholder="10:00">
+            <div class="form-group row">
+                <div class="col-md-4 offset-md-4">
+                    <label>Czas rozpoczecia</label>
+                    <input type="time" class="form-control" id="Time" placeholder="10:00">
+                </div>
+            </div>
+        <div class="form-group row">
+            <div class="col-md-12 text-center">
+                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Potwierdzam</button>
+            </div>
         </div>
     </form>
+</div>
 
 {% endblock %}
