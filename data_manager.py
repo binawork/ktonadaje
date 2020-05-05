@@ -4,3 +4,5 @@ import database_connection
 def get_all(cursor):
     cursor.execute('''SELECT * FROM stream''')
     return cursor.fetchall()
+
+get_all()
