@@ -38,7 +38,9 @@ def trenerzy_osobisci():
     database_connection.connection_handler()
     return render_template('uslugi.html', uslugi=uslugi)
 
-
+@app.route('/o_nas')
+def about_us():
+    return render_template('about_us.html')
 
 @app.route('/jak_streamowac')
 def how_to_stream():

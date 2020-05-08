@@ -1,24 +1,28 @@
 {% extends "Layout.html" %}
 
-{% block content %}
-<table class="table table-bordered table-sm">
-<thead>
-<tr>
-    <th scope="col">Type </th>
-    <th scope="col">Nazwisko</th>
-    <th scope="col">Imię</th>
-</tr>
-</thead>
-<tbody>
-    {% for event in services %}
-<tr>
-    <td><a href="{{ event['link_to'] }}">{{ event['type_of_activity'] }}</a></td>
-    <td>{{ event['last_name'] }}</td>
-    <td>{{ event['first_name']}}</td>
-</tr>
-        {% endfor %}
-</tbody>
-</table>
+{% block content %} 
 
+    <div class="container" align="center">
+        <p class="h4" class="align-content-center">Zobacz wszystkie wydarzenia lub skorzystaj z filtrów i sprawdź tylko interesującą cię kategorię:</p>
+
+        <table class="table table-bordered table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">Type </th>
+                    <th scope="col">Nazwisko</th>
+                    <th scope="col">Imię</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in services %}
+                <tr>
+                    <td><a href="{{ event['link_to'] }}">{{ event['type_of_activity'] }}</a></td>
+                    <td>{{ event['last_name'] }}</td>
+                    <td>{{ event['first_name']}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 {% endblock %}

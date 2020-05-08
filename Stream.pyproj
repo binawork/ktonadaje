@@ -37,6 +37,7 @@
     <Content Include="static\js\bootstrap.bundle.min.js" />
     <Content Include="static\js\bootstrap.js" />
     <Content Include="static\js\bootstrap.min.js" />
+    <Content Include="templates\about_us.html" />
     <Content Include="templates\Categories.html" />
     <Content Include="templates\event_questionare.html" />
     <Content Include="templates\how_to_stream.html" />

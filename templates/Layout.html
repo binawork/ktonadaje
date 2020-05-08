@@ -11,7 +11,7 @@
     <div class="navbar">
         <a class="li-navbar-item" href="{{ url_for('index') }}">KtoNadaje.pl</a>
         <a class="li-navbar-item" href="{{ url_for('how_to_stream') }}">Jak streamować</a>
-        <a class="li-navbar-item">O nas</a>
+        <a class="li-navbar-item" href="{{ url_for('about_us')}}">O nas</a>
         <a class="li-navbar-item">Mój profil</a>
         <a class="li-navbar-item" href="{{ url_for('add_event') }}">Dodaj wydarzenie</a>
         <a class="li-navbar-item" href="{{url_for('login') }}">Zaloguj</a>
@@ -22,9 +22,7 @@
         <p class="lead">W dobie koronowirusa obserwujemy wzrastający trend przenoszenia się różnego rodzaju aktywności do sieci. Jesteś trenerem, który chce organizowac zajęcia online? A może chcesz posłuchać ciekawego Webinaru i poznać nowych ludzi? To miejsce jest dla Ciebie.</p>
     </div>
 
-    <div class="container" align="center">
-        <p class="h4" class="align-content-center">Zobacz wszystkie wydarzenia lub skorzystaj z filtrów i sprawdź tylko interesującą cię kategorię:</p>
-    </div>
+   
     {% block content %} {% endblock %}
 </body>
 </html>
