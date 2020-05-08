@@ -40,5 +40,9 @@ def trenerzy_osobisci():
 
 
 
+@app.route('/jak_streamowac')
+def how_to_stream():
+    return render_template('how_to_stream.html')
+
 if __name__ == '__main__':
     app.run()
