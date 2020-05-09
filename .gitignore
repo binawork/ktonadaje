@@ -90,3 +90,5 @@ ENV/
 .vs/*
 .idea/*
 __pycache__/*
+Stream.pyproj
+Stream.sln
