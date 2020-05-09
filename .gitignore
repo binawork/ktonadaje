@@ -92,3 +92,4 @@ ENV/
 __pycache__/*
 Stream.pyproj
 Stream.sln
+Stream/obj/
