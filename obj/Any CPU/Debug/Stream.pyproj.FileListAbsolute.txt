@@ -1,3 +1,0 @@
-C:\Users\macie\source\repos\Stream\obj\Any CPU\Debug\Stream.pyproj.CoreCompileInputs.cache
-C:\Users\macie\source\repos\Stream\bin\Microsoft.PythonTools.WebRole.dll
-C:\Users\macie\source\repos\Stream\bin\wfastcgi.py
