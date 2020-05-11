@@ -86,7 +86,13 @@ ENV/
 
 # End of https://www.gitignore.io/api/venv,pycharm
 
-.vs
-.vs/*
+# some other Idea stuff
 .idea/*
 __pycache__/*
+
+# VSCode stuff
+.vs
+.vs/*
+Stream.pyproj
+Stream.sln
+obj/
