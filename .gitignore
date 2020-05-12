@@ -83,6 +83,7 @@ pyvenv.cfg
 .venv
 venv/
 ENV/
+env/
 
 # End of https://www.gitignore.io/api/venv,pycharm
 
