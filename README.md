@@ -29,14 +29,13 @@ Add more general information about project. What the purpose of the project is? 
 | Flask-Migrate | 2.5.2 | extension that supports SQLAlchemy database migrations via [Alembic](https://pypi.org/project/alembic/1.4.0/) |  
   
 ## Setup  
-### Deployed demo app  
-Link to deployed demo app is 
+### Mockup  
+Link to the mockup of this app, 
 [here](https://sites.google.com/view/ktonadajenavbar/).  
 ### Development on Linux Ubuntu 18+  
 #### Clone project
-To run the project locally, you need to have Python 3.6+ and PostgreSQL 10.12+ 
-installed.  
-If you already have it, go to the next steps.  
+To run the project locally, you need to have Python 3.8+ and PostgreSQL 10.12+ 
+installed. If you already have it, go to the next steps.  
   
 Copy the source code to your machine:  
 ```bash
@@ -59,8 +58,8 @@ deactivate
 pip install autoenv==1.0.0
 touch .env
 ```  
-Next, in your .env file, add the following:
-`**.env**`  
+Next, in your .env file, add the following:  
+**`.env`**  
 ```
 source env/bin/activate
 export APP_SETTINGS="config.DevelopmentConfig"
