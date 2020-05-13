@@ -111,10 +111,11 @@ To-do list:
 Project is: _in progress_  
   
 ## Contact  
-Created by [@BINA.work](https://bina.work/):  
+Created by [@BINA.work](http://www.bina.work):  
 * Maciej Ambroziak (dev),  
 * [Krzysztof S. Matejak "Kris" \(dev)](https://www.linkedin.com/in/matejak/),  
 * Wiktor Świątkowski (pm),  
-* Monika Zabdyr (ux, design),  
-\- feel free to contact us!  
+* Monika Zabdyr (ux, design)  
+
+Feel free to contact us!  
   
