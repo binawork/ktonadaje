@@ -43,8 +43,10 @@ git clone git@github.com:MaciejAmbroziak/Stream.git YYY
 cd YYY
 ```  
 #### Create Python environment  
-Then create a virtual environment, checkout to branch `develop` and install all requirements. `virtualenv` 
-is used to isolate Python modules so they don’t pollute your system. Our referenced version of the `virtualenv` in at least 16.7.8.  
+Then create a virtual environment, checkout to branch `develop` and install 
+all requirements. `virtualenv` is used to isolate Python modules so they 
+don’t pollute your system. Our referenced version of the `virtualenv` in at 
+least 16.7.8.  
 ```bash
 virtualenv env
 source env/bin/activate
@@ -52,20 +54,23 @@ git checkout develop
 pip install -r requirements.txt
 ```  
 #### Prepare local env with autoenv  
-To set up the application with environment variables, we suggest to use autoenv. This program allows us to set commands that will run every time we `cd` into our directory. In order to use it, we will need to install it globally. First, exit out of your virtual environment in the terminal, install autoenv, then and add a _.env_ file:  
+To set up the application with environment variables, we suggest to use 
+`autoenv`. This program allows us to set commands that will run every time 
+we `cd` into our directory. In order to use it, we will need to install it 
+globally. First, exit out of your virtual environment in the terminal, 
+install `autoenv`, and then add a **.env** file:  
 ```bash
 deactivate
 pip install autoenv==1.0.0
 touch .env
 ```  
-Next, in your .env file, add the following:  
-**`.env`**  
+Next, in your **.env** file, add the following:  
 ```
 source env/bin/activate
 export APP_SETTINGS="config.DevelopmentConfig"
 export DATABASE_URL="postgresql:///ktonadaje_dev"
 ```  
-Run the following to update then refresh your _.bashrc_:  
+Run the following to update and then refresh your _.bashrc_:  
 ```bash
 echo "source `which activate.sh`" >> ~/.bashrc
 source ~/.bashrc
