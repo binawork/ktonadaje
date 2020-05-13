@@ -1,16 +1,16 @@
-from app import db as db
+from app import db
 from app import Event, Category
 
 
 def main():
     db.create_all()
 
-    ho = Category(title="Hobby")
-    ps = Category(title="Psychologia")
-    co = Category(title="Programowanie")
-    rr = Category(title="Związki")
-    lm = Category(title="Muzyka")
-    st = Category(title="Stream")
+    ho = Category(title="hobby")
+    ps = Category(title="psychologia")
+    co = Category(title="programowanie")
+    rr = Category(title="związki")
+    lm = Category(title="muzyka")
+    st = Category(title="live stream")
 
     ev1 = Event(
         title="Zarządzanie sobą w kryzysie tożsamości",
@@ -55,7 +55,18 @@ def main():
         categories=[lm, st]
     )
 
+    categories = [
+        "joga",
+        "fitness",
+        "czytanie książek na głos",
+        "terapia grupowa",
+        "zajęcia teatralne",
+    ]
+    obj_categories = [Category(title=cat) for cat in categories]
+
     db.session.add_all([ho, ps, co, ev1, ev2, ev3, ev4, ev5, ev6])
+    db.session.add_all(obj_categories)
+
     db.session.commit()
     db.session.close()
 

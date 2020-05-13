@@ -16,7 +16,9 @@ class Event(db.Model):
     title = db.Column(db.String)
     host_name = db.Column(db.String)
     url = db.Column(db.String)
-    planned_date = db.Column(db.DateTime)
+    planned_start = db.Column(db.DateTime)
+    planned_end = db.Column(db.DateTime)
+    description = db.Column(db.String)
 
     categories = db.relationship("Category",
                                  secondary=events_categories_association)
