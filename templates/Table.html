@@ -8,17 +8,21 @@
         <table class="table table-bordered table-sm">
             <thead>
                 <tr>
-                    <th scope="col">Type </th>
-                    <th scope="col">Nazwisko</th>
-                    <th scope="col">Imię</th>
+                    <th scope="col">Tytuł</th>
+                    <th scope="col">Host</th>
+                    <th scope="col">Kategoria</th>
                 </tr>
             </thead>
             <tbody>
-                {% for event in services %}
+                {% for event in events %}
                 <tr>
-                    <td><a href="{{ event['link_to'] }}">{{ event['type_of_activity'] }}</a></td>
-                    <td>{{ event['last_name'] }}</td>
-                    <td>{{ event['first_name']}}</td>
+                    <td><a href="{{ event.url }}">{{ event.title }}</a></td>
+                    <td>{{ event.host_name }}</td>
+                    <td>
+                        {% for category in event.categories %}
+                        {{ category }},
+                        {% endfor %}
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
