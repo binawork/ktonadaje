@@ -18,9 +18,10 @@ Add more general information about project. What the purpose of the project is? 
 ![Example screenshot](./img/screenshot.png)  
   
 ## Technologies  
-* Tech 1 - version 1.0  
-* Tech 2 - version 2.0  
-* Tech 3 - version 3.0  
+* Python - version 3.8.2  
+* Flask - version 1.1.2  
+* SQLALchemy - version 1.3.16  
+* PostrgeSQL - version 10.12  
   
 ## Setup  
 #### Deployed demo app  
