@@ -87,14 +87,14 @@ And then apply the upgrades from migrates to your database:
 ```bash
 python manage.py db upgrade
 ```  
-Optionally, you can also insert sample data into your database. Just use the already prepared script:  
-```bash
-python insert_sample_data_dev_db.py
-```  
 #### Check it out!  
 Finally, check that the project works:  
 ```bash
 python app.py
+```  
+Optionally, you can also insert sample data into your database. Just use the already prepared script:  
+```bash
+python insert_sample_data_dev_db.py
 ```  
   
 ## Code Examples  
