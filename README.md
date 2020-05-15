@@ -150,7 +150,7 @@ CREATE DATABASE ktonadaje_dev;
 ```  
 And then (into **`Git Bash`**) apply the database structure to your database:  
 ```bash
-$ py -m manage.py db upgrade
+$ py manage.py db upgrade
 ```  
 #### Check it out!  
 Finally, check that the project works:  
