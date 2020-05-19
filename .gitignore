@@ -98,8 +98,9 @@ Stream.pyproj
 Stream.sln
 obj/
 
-# Local environment
+# Local environment settings
 .env
+.auto-env
 
 # VSCode
 .vscode/
