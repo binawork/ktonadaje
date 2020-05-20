@@ -1,5 +1,0 @@
-.col-md-offset-1
-
-.btn-warning {
-    width: 350px;
-}
