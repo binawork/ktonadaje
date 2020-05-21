@@ -13,43 +13,37 @@
                 <div class="form-group row">
                     <div class="col-md-4 offset-md-4">
                         <label>Nazwa wydarzenia</label>
-                        <input type="text" class="form-control" id="Name" placeholder="np. korepetycje">
+                        <input type="text" class="form-control" id="event_title">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-4 offset-md-4">
-                        <label>Imię</label>
-                        <input type="text" class="form-control" id="FirstName" placeholder="Jan">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-4 offset-md-4">
-                        <label>Nazwisko</label>
-                        <input type="text" class="form-control" id="Surname" placeholder="Kowalski">
+                        <label>Nazwa hosta</label>
+                        <input type="text" class="form-control" id="host_full_name">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-4 offset-md-4">
                         <label>Link</label>
-                        <input type="text" class="form-control" id="Link" placeholder="Wklej link">
+                        <input type="url" class="form-control" id="event_link" placeholder="https://www...">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-4 offset-md-4">
-                        <label>Data</label>
-                        <input type="date" class="form-control" id="Date" placeholder="2020-10-01">
+                        <label>Planowany dzień i godzina rozpoczęcia</label>
+                        <input type="datetime" class="form-control" id="start_datetime">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-4 offset-md-4">
-                        <label>Czas rozpoczecia</label>
-                        <input type="time" class="form-control" id="Time" placeholder="10:00">
+                        <label>Przewidywany czas trwania (godziny)</label>
+                        <input type="number" min="0.5" max="72" step="0.5" class="form-control" id="estimated_duration">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-4 offset-md-4">
                         <label>Opis wydarzenia</label>
-                        <input type="text" required class="form-control" id="text" placeholder="Dodatkowe informacje o evencie">
+                        <input type="text" required class="form-control" id="event_description" placeholder="Informacje o wydarzeniu">
                     </div>
                 </div>
                 <div class="form-group row">
