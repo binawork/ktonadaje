@@ -4,10 +4,16 @@
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #212529;
     text-align: left;
-    background-color: #fff
+    background-color: white;
 }
-.btn-primary {
-    background-color: #FF8800;
+.btn-warning {
+    width: 350px;
+}
+.jumbotron {
+    background-color: #ffC107;
+}
+.navbar {
+    min-height: 32px;
+    margin-top: 0px;
 }
