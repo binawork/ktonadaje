@@ -25,7 +25,7 @@ class EventForm(FlaskForm):
     estimated_duration = DecimalField("Duration", [
         Optional(),
     ])
-    event_category = SelectMultipleField("Categories", [
+    event_categories = SelectMultipleField("Categories", [
         Optional(),
     ])
     event_description = TextField("Event description", [
