@@ -1,7 +1,3 @@
-{% extends 'layout.html' %}
-
-{% block content %}
-
 <p>THIS IS THE QUERY:</p>
 {% for event in query: %}
     <p>
@@ -13,5 +9,3 @@
         {{ event.categories }}
     </p>
 {% endfor %}
-
-{% endblock %}
