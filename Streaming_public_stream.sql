@@ -13,8 +13,8 @@ create table stream
     link_to                varchar(100)  not null
 );
 
-alter table stream
-    owner to maciej;
+-- alter table stream
+--     owner to maciej;
 
 create unique index stream_id_uindex
     on stream (id);
