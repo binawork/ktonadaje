@@ -20,7 +20,7 @@ class EventForm(FlaskForm):
         URL(message="Not valid url adress."),
     ])
     start_datetime = DateTimeField("Start date-time", [
-        DataRequired(message="This field is required."),
+        Optional(),
     ])
     estimated_duration = DecimalField("Duration", [
         Optional(),
@@ -31,6 +31,6 @@ class EventForm(FlaskForm):
     event_description = TextField("Event description", [
         Optional(),
     ])
-    agreement_checkbox = BooleanField("Accept agreement")
-    recaptcha = RecaptchaField()
-    submit = SubmitField("Submit")
+    # agreement_checkbox = BooleanField("Accept agreement")
+    # recaptcha = RecaptchaField()
+    submit = SubmitField("Dodaj")
