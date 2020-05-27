@@ -54,7 +54,7 @@
                 </ul>
             {% endif %}
         </div>
-        <div class="form-field">{{ form.event_categories.label }} {{ form.event_categories.choices }}
+        <div class="form-field">{{ form.event_categories.label }} {{ form.event_categories }}
             {% if form.event_categories.errors %}
                 <ul class="errors">
                     {% for error in form.event_categories.errors %}

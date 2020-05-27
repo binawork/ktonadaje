@@ -10,7 +10,7 @@ from flask import (
 )
 
 import config
-from forms import EventForm
+from forms import AddEventForm
 
 
 app = Flask(__name__)
@@ -33,47 +33,49 @@ def index():
 
 @app.route('/add-event', methods=('GET', 'POST'))
 def add_event():
-    """Adding event form"""
-    form = EventForm()
-    print("form.errors", form.errors)
-    # POST: Add event
-    if request.method == "POST":
-        print(form.event_categories.data)
-        if form.validate_on_submit():
-            # Get form fields
-            title = form.event_title.data
-            host_name = form.host_name.data
-            url = form.event_link.data
-            categories = form.event_categories.data
-            new_event = Event(
-                                title=title, 
-                                host_name=host_name, 
-                                url=url, 
-                                categories=categories
-            )
-            # Add to database
-            print(
-                    new_event.title, "||", 
-                    new_event.host_name, "\n", 
-                    new_event.url, "\n",
-                    new_event.categories,
-            )
-            # db.session.add(new_event)
-            # db.session.commit()
-            return redirect(url_for('success'))
-    # GET: Serve add-event page
-    choices = [
-        (category.title, 
-        category.title) for category in Category.query.order_by("title")
+    """
+    Adding Events to database through the form on the webpage.
+    """
+    form = AddEventForm(request.form)
+    available_categories = Category.query.order_by("title")
+    form.event_categories.choices = [
+        (c.id, c.title) for c in available_categories
     ]
-    form.event_categories.choices = choices
+    # POST: Add event
+    if form.validate_on_submit():
+        new_event = Event(
+            title = form.event_title.data, 
+            host_name = form.host_name.data, 
+            url = form.event_link.data, 
+            categories = Category.query.filter(
+                Category.id.in_(form.event_categories.data)).all()
+        )
+        # Add Event to database
+        db.session.add(new_event)
+        db.session.commit()
+        return redirect(url_for('success'))
+    # GET: Serve add-event page
     return render_template('events/add_event_wtform_tut.html',
                             title='KtoNadaje',
                             form=form)
 
 
+@app.route('/edit-event/<int:id>', methods=('GET', 'POST', 'DELETE'))
+def edit_event(int: id):
+    """
+    may be helpful: 
+    https://stackoverflow.com/questions/9885693/how-i-do-to-update-data-on-\
+        many-to-many-with-wtforms-and-sqlalchemy
+    """
+    pass
+
+
 @app.route('/success', methods=('GET', 'POST'))
 def success():
+    """
+    Helper function for testing forms. 
+    Displays all Events from the database after completing the form.
+    """
     query = []
     for event in db.session.query(Event):
         query.append(event)

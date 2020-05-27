@@ -5,7 +5,7 @@ from wtforms.fields.html5 import DateTimeField, URLField
 from wtforms.validators import DataRequired, Length, Optional, URL
 
 
-class EventForm(FlaskForm):
+class AddEventForm(FlaskForm):
     """Adding event form"""
     event_title = StringField("Title", [
         DataRequired(message="This field is required."),
@@ -27,7 +27,8 @@ class EventForm(FlaskForm):
     ])
     event_categories = SelectMultipleField("Categories", [
         Optional(),
-    ])
+    ], coerce=int,
+    )
     event_description = TextField("Event description", [
         Optional(),
     ])
