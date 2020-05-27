@@ -1,8 +1,3 @@
-
-.vs/*
-.idea/*
-__pycache__/*
-
 # Created by https://www.gitignore.io/api/venv,pycharm
 
 ### PyCharm ###
@@ -88,5 +83,28 @@ pyvenv.cfg
 .venv
 venv/
 ENV/
+env/
 
 # End of https://www.gitignore.io/api/venv,pycharm
+
+# some other Idea stuff
+.idea/*
+.idea
+__pycache__/*
+__pycache__
+migrations/__pycache__
+
+
+# VSCode stuff
+.vs
+.vs/*
+Stream.pyproj
+Stream.sln
+obj/
+
+# Local environment settings
+.env
+.auto-env
+
+# VSCode
+.vscode/

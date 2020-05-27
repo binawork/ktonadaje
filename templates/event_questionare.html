@@ -1,50 +1,64 @@
 ﻿{% extends 'Layout.html' %}
 
 {% block content %}
-<div>
-    <form method="post">
-        <div class="form-group row">
-            <div class="col-md-4 offset-md-4">
-                <label>Nazwa wydarzenia</label>
-                <input type="text" class="form-control" id="Name" placeholder="korepetycje">
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-4 offset-md-4">
-                <label>Imie</label>
-                <input type="text" class="form-control" id="FirstName" placeholder="Jan">
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-4 offset-md-4">
-                <label>Nazwisko</label>
-                <input type="text" class="form-control" id="Surname" placeholder="Kowalski">
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-4 offset-md-4">
-                <label>Link</label>
-                <input type="text" class="form-control" id="Link" placeholder="www.KtoNadaje.pl">
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-4 offset-md-4">
-                <label>Data</label>
-                <input type="date" class="form-control" id="Date" placeholder="2020-10-01">
-            </div>
-        </div>
-            <div class="form-group row">
-                <div class="col-md-4 offset-md-4">
-                    <label>Czas rozpoczecia</label>
-                    <input type="time" class="form-control" id="Time" placeholder="10:00">
-                </div>
-            </div>
-        <div class="form-group row">
-            <div class="col-md-12 text-center">
-                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Potwierdzam</button>
-            </div>
-        </div>
-    </form>
-</div>
+    <div class="container" align="center">
 
+        <div class="text-center">
+            <p class="h2">Dodaj wydarzenie, dzięki temu jeszcze więcej osób się o nim dowie.</p>
+            <br />
+            <br />
+        </div>
+        <div>
+            <form method="post">
+                <div class="form-group row">
+                    <div class="col-md-4 offset-md-4">
+                        <label>Nazwa wydarzenia</label>
+                        <input type="text" class="form-control" id="Name" placeholder="np. korepetycje">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4 offset-md-4">
+                        <label>Imię</label>
+                        <input type="text" class="form-control" id="FirstName" placeholder="Jan">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4 offset-md-4">
+                        <label>Nazwisko</label>
+                        <input type="text" class="form-control" id="Surname" placeholder="Kowalski">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4 offset-md-4">
+                        <label>Link</label>
+                        <input type="text" class="form-control" id="Link" placeholder="Wklej link">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4 offset-md-4">
+                        <label>Data</label>
+                        <input type="date" class="form-control" id="Date" placeholder="2020-10-01">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4 offset-md-4">
+                        <label>Czas rozpoczecia</label>
+                        <input type="time" class="form-control" id="Time" placeholder="10:00">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4 offset-md-4">
+                        <label>Opis wydarzenia</label>
+                        <input type="text" required class="form-control" id="text" placeholder="Dodatkowe informacje o evencie">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12 text-center">
+                        <button type="button" class="btn btn-primary btn-lg btn-warning">Dodaj wydarzenie</button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock %}
