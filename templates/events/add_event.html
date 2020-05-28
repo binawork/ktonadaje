@@ -1,0 +1,73 @@
+﻿{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="container" align="center">
+        <div class="text-center">
+            <p class="h2">Dodaj wydarzenie</p>
+            <br />
+            <br />
+        </div>
+        <div>
+            <form method="POST" action="/">
+                <div class="form-group row">
+                    <div class="col-md-4 offset-md-4">{{ form.event_title.label }} {{ form.event_title(size=25) }}
+                        {% if form.event_title.errors %}
+                            <ul>
+                                {% for error in form.event_title.errors %}
+                                    <p class="error-form">{{ error }}</p>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4 offset-md-4">{{ form.host_name.label }} {{ form.host_name(size=25) }}
+                        {% if form.host_name.errors %}
+                            <ul>
+                                {% for error in form.host_name.errors %}
+                                    <p class="error-form">{{ error }}</p>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4 offset-md-4">{{ form.event_link.label }} {{ form.event_link }}
+                        {% if form.event_link.errors %}
+                            <ul>
+                                {% for error in form.event_link.errors %}
+                                    <p class="error-form">{{ error }}</p>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4 offset-md-4">{{ form.start_datetime.label }} {{ form.start_datetime }}
+                        {% if form.start_datetime.errors %}
+                            <ul>
+                                {% for error in form.start_datetime.errors %}
+                                    <p class="error-form">{{ error }}</p>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4 offset-md-4">{{ form.estimated_duration.label }} {{ form.estimated_duration }}</div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4 offset-md-4">{{ form.event_categories.label }} {{ form.event_categories }}</div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4 offset-md-4">{{ form.event_description.label }} {{ form.event_description }}</div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12 text-center">
+                        <div class="btn btn-primary btn-lg btn-warning">{{ form.submit }}</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

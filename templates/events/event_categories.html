@@ -1,0 +1,15 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kategorie</title>
+</head>
+<body>
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">Home</a>
+    {% for categorie in categories %}
+        <a class="nav-link bg-light" href="#">{{ category.title }}</a>
+    {% endfor %}
+</nav>
+</body>
+</html>

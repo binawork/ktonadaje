@@ -18,10 +18,13 @@ class Event(db.Model):
     url = db.Column(db.String)
     planned_start = db.Column(db.DateTime)
     planned_end = db.Column(db.DateTime)
+    estimated_duration = db.Column(db.Integer)
     description = db.Column(db.String)
 
-    categories = db.relationship("Category",
-                                 secondary=events_categories_association)
+    categories = db.relationship(
+                                "Category",
+                                secondary=events_categories_association
+                                )
 
     def __init__(self, title, host_name, url, categories):
         self.title = title

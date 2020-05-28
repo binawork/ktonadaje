@@ -90,10 +90,6 @@ env/
 # some other Idea stuff
 .idea/*
 .idea
-__pycache__/*
-__pycache__
-migrations/__pycache__
-
 
 # VSCode stuff
 .vs
@@ -108,3 +104,7 @@ obj/
 
 # VSCode
 .vscode/
+
+# Pycache SQLAlchemy migrations
+*.pyc
+__pycache__

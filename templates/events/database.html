@@ -1,0 +1,11 @@
+<p>THIS IS THE QUERY:</p>
+{% for event in query: %}
+    <p>
+        {{ event.title }}<br />
+        {{ event.host_name }}<br />
+        {{ event.planned_start }}<br />
+        {{ event.estimated_duration }}<br />
+        {{ event.description }}<br />
+        {{ event.categories }}
+    </p>
+{% endfor %}
