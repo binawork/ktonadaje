@@ -21,6 +21,7 @@ def upgrade():
     op.add_column('events', sa.Column('description', sa.String(), nullable=True))
     op.add_column('events', sa.Column('planned_end', sa.DateTime(), nullable=True))
     op.add_column('events', sa.Column('planned_start', sa.DateTime(), nullable=True))
+    op.add_column('events', sa.Column('estimated_duration', sa.Integer, nullable=True))
     op.drop_column('events', 'planned_date')
     # ### end Alembic commands ###
 
