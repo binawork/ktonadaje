@@ -21,7 +21,8 @@ class AddEventForm(FlaskForm):
     ])
     start_datetime = DateTimeField("Start date-time", [
         Optional(),
-    ])
+    ], format='%d-%m-%Y %H:%M'
+    )
     estimated_duration = DecimalField("Duration", [
         Optional(),
     ])
