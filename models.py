@@ -26,11 +26,23 @@ class Event(db.Model):
                                 secondary=events_categories_association
                                 )
 
-    def __init__(self, title, host_name, url, categories):
+    def __init__(
+                    self, 
+                    title, 
+                    host_name, 
+                    url, 
+                    categories, 
+                    planned_start, 
+                    estimated_duration,
+                    description
+        ):
         self.title = title
         self.host_name = host_name
         self.url = url
         self.categories = categories
+        self.planned_start = planned_start
+        self.estimated_duration = estimated_duration
+        self.description = description
 
     def __repr__(self):
         return "{}".format(self.title)
