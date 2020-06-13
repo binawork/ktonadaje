@@ -5,12 +5,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 {% endblock %}
 
 {% block content %}
 <div class="formwrapper">
     <h2 class="title">Dodaj wydarzenie</h2>
-    <form method="POST" novalidate>
+    <form method="POST">
         {{ form.csrf_token }}
         <div class="form-group">
             <div class="form-field">
@@ -57,8 +58,8 @@
         <div class="form-group">
             <div class="form-field">
                 <label>Planowana data i godzina</label>
-                <div class="input-group date" id="datetimepicker">
-                    {{ form.start_datetime }}
+                <div class="input-group date">
+                    {{ form.start_datetime(class="datetime-picker") }}
                     <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -69,8 +70,12 @@
         <div class="form-group">
             <label>Kategorie</label>
             <div class="form-field">
-                
-                <select id="select" multiple>{% for category in form.event_categories %}{{ category }}{% endfor %}</select>
+                {{ form.event_categories }}
+                <!-- <select class="categ-select" multiple>
+                    {% for category in form.event_categories.choices %}
+                        <option value="{{category}}">{{category[1]}}</option>
+                    {% endfor %}
+                </select> -->
                 {% if form.event_categories.errors %}
                     <ul class="errors">
                         {% for error in form.event_categories.errors %}
@@ -123,9 +128,15 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.17/js/i18n/defaults-pl_PL.min.js"></script>
 <script type="text/javascript">
+    moment.updateLocale('pl');
     $(function () {
-        $('#datetimepicker').datetimepicker();
-        $('#select').selectpicker();
+        $('.datetime-picker').datetimepicker({
+            format: 'DD-MM-YYYY HH:mm',
+            defaultDate: new Date(),
+        });
+    });
+    $(function () {
+        $('.categ-select').selectpicker();
     });
 </script>
 {% endblock %}

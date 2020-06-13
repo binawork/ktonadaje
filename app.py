@@ -1,5 +1,6 @@
 import os
 from flask_sqlalchemy import SQLAlchemy
+from flask_moment import Moment
 from flask import (
                     Flask, 
                     render_template, 
@@ -17,6 +18,7 @@ app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SECRET_KEY'] = 'you-will-never-guess'
 db = SQLAlchemy(app)
+moment = Moment(app)
 
 from models import *
 
@@ -42,18 +44,23 @@ def add_event():
         (c.id, c.title) for c in available_categories
     ]
     # POST: Add event
-    if form.validate_on_submit():
-        new_event = Event(
-            title = form.event_title.data, 
-            host_name = form.host_name.data, 
-            url = form.event_link.data, 
-            categories = Category.query.filter(
-                Category.id.in_(form.event_categories.data)).all()
-        )
-        # Add Event to database
-        db.session.add(new_event)
-        db.session.commit()
-        return redirect(url_for('success'))
+    if request.method == 'POST':
+        if form.validate():
+            new_event = Event(
+                title = form.event_title.data, 
+                host_name = form.host_name.data, 
+                url = form.event_link.data, 
+                categories = Category.query.filter(
+                    Category.id.in_(form.event_categories.data)).all(),
+                planned_start = form.start_datetime.data,
+                estimated_duration = form.estimated_duration.data,
+                description = form.event_description.data,
+            )
+            # Add Event to database
+            db.session.add(new_event)
+            db.session.commit()
+            return redirect(url_for('index'))
+        return redirect(url_for('add_event'))
     # GET: Serve add-event page
     return render_template('events/add_event_wtform_tut.html',
                             title='KtoNadaje',
@@ -68,20 +75,6 @@ def edit_event(int: id):
         many-to-many-with-wtforms-and-sqlalchemy
     """
     pass
-
-
-@app.route('/success', methods=('GET', 'POST'))
-def success():
-    """
-    Helper function for testing forms. 
-    Displays all Events from the database after completing the form.
-    """
-    query = []
-    for event in db.session.query(Event):
-        query.append(event)
-    return render_template('success_wtform_tut.html',
-                            title='KtoNadaje',
-                            query=query)
 
 
 @app.route('/register', methods = ['GET', 'POST'])
