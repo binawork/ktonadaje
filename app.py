@@ -38,9 +38,7 @@ def add_event():
     """
     form = AddEventForm(request.form)
     available_categories = Category.query.order_by("title")
-    form.event_categories.choices = [
-        (c.id, c.title) for c in available_categories
-    ]
+    form.event_categories.choices = [(c.id, c.title) for c in available_categories]
     # POST: Add event
     if form.validate_on_submit():
         new_event = Event(

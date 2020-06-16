@@ -35,3 +35,8 @@ class AddEventForm(FlaskForm):
     # agreement_checkbox = BooleanField("Accept agreement")
     # recaptcha = RecaptchaField()
     submit = SubmitField("Dodaj")
+
+
+# TODO: Add class AddRegistrationForm
+
+# TODO: Add class AddLoginForm (inherit from class AddRegistrationForm)
