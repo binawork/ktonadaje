@@ -9,7 +9,10 @@
                 <tr>
                     <th scope="col">Tytuł</th>
                     <th scope="col">Host</th>
-                    <th scope="col">Kategoria</th>
+                    <th scope="col">Kiedy</th>
+                    <th scope="col">Czas (h)</th>
+                    <th scope="col">Opis</th>
+                    <th scope="col">Kategorie</th>
                 </tr>
             </thead>
             <tbody>
@@ -17,9 +20,12 @@
                 <tr>
                     <td><a href="{{ event.url }}">{{ event.title }}</a></td>
                     <td>{{ event.host_name }}</td>
+                    <td>{{ event.planned_start }}</td>
+                    <td>{{ event.estimated_duration }}</td>
+                    <td>{{ event.description }}</td>
                     <td>
                         {% for category in event.categories %}
-                        {{ category }},
+                            {{ category }},
                         {% endfor %}
                     </td>
                 </tr>
