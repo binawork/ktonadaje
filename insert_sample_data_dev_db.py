@@ -61,6 +61,7 @@ def main():
         "czytanie książek na głos",
         "terapia grupowa",
         "zajęcia teatralne",
+        "gotowanie",
     ]
     obj_categories = [Category(title=cat) for cat in categories]
 
