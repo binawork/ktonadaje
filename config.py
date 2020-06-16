@@ -18,6 +18,9 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    # Deploy on Heroku
+    LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
+
 
 class ProductionConfig(Config):
     DEBUG = False
