@@ -75,14 +75,26 @@ def edit_event(int: id):
     pass
 
 
-@app.route('/register', methods = ['GET', 'POST'])
+# @app.route('/register', methods = ['GET', 'POST'])
+# def register():
+#     if request.method == 'POST':
+#         request.form['']
+#         return redirect('index')
+#     else:
+#         return render_template('users/register_old.html',
+#                                 title='KtoNadaje',)
+
+
+@app.route('/register', methods=['GET', 'POST'])
 def register():
-    if request.method == 'POST':
-        request.form['']
-        return redirect('index')
-    else:
-        return render_template('users/register.html',
-                                title='KtoNadaje',)
+    form = RegistrationForm(request.form)
+    if request.method == 'POST' and form.validate():
+        user = User(form.username.data, form.email.data,
+                    form.password.data)
+        db_session.add(user)
+        flash('Thanks for registering')
+        return redirect(url_for('login'))
+    return render_template('register.html', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
