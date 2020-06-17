@@ -1,13 +1,34 @@
 {% block styles %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}" rel="stylesheet" type="text/css">    
 {% endblock %}
 
-<div class="navbar">
-    <a class="li-navbar-item" href="{{ url_for('index') }}">KtoNadaje.pl</a>
-    <a class="li-navbar-item" href="{{ url_for('howto_streaming') }}">Jak streamować</a>
-    <a class="li-navbar-item" href="{{ url_for('about')}}">O nas</a>
-    <a class="li-navbar-item">Mój profil</a>
-    <a class="li-navbar-item" href="{{ url_for('add_event') }}">Dodaj wydarzenie</a>
-    <a class="li-navbar-item" href="{{url_for('login') }}">Zaloguj</a>
-    <a class="li-navbar-item" href="{{ url_for('register')}}">Rejestracja</a>
-</div>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{{ url_for('index') }}">KtoNadaje</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('index') }}">Główna <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('about')}}">O Nas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('add_event') }}">Dodaj</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="{{ url_for('login') }}">Zaloguj</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="static/js/bootstrap.js"></script>
