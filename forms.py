@@ -37,6 +37,7 @@ class AddEventForm(FlaskForm):
     # recaptcha = RecaptchaField()
     submit = SubmitField("Dodaj")
 
+
 class RegistrationForm(FlaskForm):
     username = StringField('Username', [Length(min=4, max=25)])
     email = StringField('Email Address', [Length(min=6, max=35)])
@@ -45,5 +46,5 @@ class RegistrationForm(FlaskForm):
         EqualTo('confirm', message='Passwords must match')
     ])
     confirm = PasswordField('Repeat Password')
-    accept_tos = BooleanField('I accept the TOS', [DataRequired()])
+    # accept_tos = BooleanField('I accept the TOS', [DataRequired()])
 

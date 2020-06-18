@@ -2,16 +2,17 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_moment import Moment
 from flask import (
-                    Flask, 
-                    render_template, 
-                    url_for, 
-                    request, 
-                    redirect, 
+                    Flask,
+                    render_template,
+                    url_for,
+                    request,
+                    redirect,
                     make_response,
 )
 
 import config
-from forms import AddEventForm
+import decrypt_password as dp
+from forms import AddEventForm, RegistrationForm
 
 
 app = Flask(__name__)
@@ -45,9 +46,9 @@ def add_event():
     if request.method == 'POST':
         if form.validate():
             new_event = Event(
-                title = form.event_title.data, 
-                host_name = form.host_name.data, 
-                url = form.event_link.data, 
+                title = form.event_title.data,
+                host_name = form.host_name.data,
+                url = form.event_link.data,
                 categories = Category.query.filter(
                     Category.id.in_(form.event_categories.data)).all(),
                 planned_start = form.start_datetime.data,
@@ -66,7 +67,7 @@ def add_event():
 
 
 @app.route('/edit-event/<int:id>', methods=('GET', 'POST', 'DELETE'))
-def edit_event(int: id):
+def edit_event(id: int):
     """
     may be helpful: 
     https://stackoverflow.com/questions/9885693/how-i-do-to-update-data-on-\
@@ -89,12 +90,15 @@ def edit_event(int: id):
 def register():
     form = RegistrationForm(request.form)
     if request.method == 'POST' and form.validate():
-        user = User(form.username.data, form.email.data,
-                    form.password.data)
-        db_session.add(user)
-        flash('Thanks for registering')
-        return redirect(url_for('login'))
-    return render_template('register.html', form=form)
+        user = User(username=form.username.data,
+                    email=form.email.data,
+                    password=dp.password_hash(form.password.data)
+                    )
+        db.session.add(user)
+        db.session.commit()
+        # flash('Registration succesfull')
+        return redirect(url_for('index'))
+    return render_template('users/register.html', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
