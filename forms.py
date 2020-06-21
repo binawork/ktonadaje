@@ -1,8 +1,9 @@
 from flask_wtf import FlaskForm, RecaptchaField
+from wtforms import Form
 from wtforms import StringField, TextField, SubmitField, BooleanField, PasswordField
 from wtforms import SelectMultipleField, DecimalField
-from wtforms.fields.html5 import DateTimeField, URLField
-from wtforms.validators import DataRequired, Length, Optional, URL, EqualTo
+from wtforms.fields.html5 import DateTimeField, URLField, EmailField
+from wtforms.validators import DataRequired, Length, Optional, URL, EqualTo, Email
 
 
 class AddEventForm(FlaskForm):
@@ -38,13 +39,24 @@ class AddEventForm(FlaskForm):
     submit = SubmitField("Dodaj")
 
 
-class RegistrationForm(FlaskForm):
-    username = StringField('Username', [Length(min=4, max=25)])
-    email = StringField('Email Address', [Length(min=6, max=35)])
+class RegistrationForm(Form):
+    username = StringField('Username', [
+        DataRequired(message="This field is required."),
+        Length(min=3, max=25, message="Username must be 3-25 characters long.")
+    ])
+
+    email = EmailField('Email Address', [
+        DataRequired(message="This field is required."),
+        Email(message="Invalid email address")
+    ])
+
     password = PasswordField('New Password', [
         DataRequired(),
         EqualTo('confirm', message='Passwords must match')
     ])
+
     confirm = PasswordField('Repeat Password')
+
     # accept_tos = BooleanField('I accept the TOS', [DataRequired()])
 
+    submit = SubmitField("Register")

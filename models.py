@@ -75,13 +75,13 @@ class User(db.Model):
         return self._password
 
     @password.setter
-    def _set_password(self, password_text):
-        self._password = bcrypt.generate_password_hash(password_text)
+    def _set_password(self, password):
+        self._password = bcrypt.generate_password_hash(password)
 
     def __init__(self, username, email, password):
         self.username = username
         self.email = email
-        self._password = password
+        self._password = bcrypt.generate_password_hash(password)
 
     def __repr__(self):
         return "{}".format(self.username)

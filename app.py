@@ -8,21 +8,20 @@ from flask import (
                     request,
                     redirect,
                     make_response,
+                    flash
 )
-
 import config
-from flask.ext.bcrypt import Bcrypt
+from flask_bcrypt import Bcrypt
 from forms import AddEventForm, RegistrationForm
+from models import *
 
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
-app.config['SECRET_KEY'] = 'you-will-never-guess'
+app.config['SECRET_KEY'] = os.urandom(32)
 db = SQLAlchemy(app)
 moment = Moment(app)
 bcrypt = Bcrypt(app)
-
-from models import *
 
 
 @app.route('/')
@@ -82,16 +81,20 @@ def edit_event(id: int):
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm(request.form)
-    if request.method == 'POST' and form.validate():
-        user = User(username=form.username.data,
-                    email=form.email.data,
-                    password=form.password.data
-                    )
-        db.session.add(user)
-        db.session.commit()
-        # flash('Registration succesfull')
-        return redirect(url_for('index'))
+    if request.method == 'POST':
+        if form.validate():
+            user = User(username=form.username.data,
+                        email=form.email.data,
+                        password=form.password.data
+                        )
+            db.session.add(user)
+            db.session.commit()
+            flash('Registration succesfull')
+            return redirect(url_for('index'))
+        else:
+            return "<p>Error</p>"
     return render_template('users/register.html', form=form)
+
 
 
 @app.route('/login', methods=['GET', 'POST'])
