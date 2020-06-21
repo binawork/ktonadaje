@@ -1,4 +1,5 @@
-from app import db
+from app import db, bcrypt
+from sqlalchemy.ext.hybrid import hybrid_property
 
 
 events_categories_association = db.Table(
@@ -64,15 +65,23 @@ class Category(db.Model):
 class User(db.Model):
     __tablename__ = "users"
 
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String, nullable=False, unique=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    username = db.Column(db.String(64), nullable=False, unique=True)
     email = db.Column(db.String, nullable=False, unique=True)
-    password = db.Column(db.String, nullable=False)
+    _password = db.Column(db.String(128), nullable=False)
+
+    @hybrid_property
+    def password(self):
+        return self._password
+
+    @password.setter
+    def _set_password(self, password_text):
+        self._password = bcrypt.generate_password_hash(password_text)
 
     def __init__(self, username, email, password):
         self.username = username
         self.email = email
-        self.password = password
+        self._password = password
 
     def __repr__(self):
         return "{}".format(self.username)

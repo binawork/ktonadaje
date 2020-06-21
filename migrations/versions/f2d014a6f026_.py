@@ -23,6 +23,13 @@ def upgrade():
     op.add_column('events', sa.Column('planned_start', sa.DateTime(), nullable=True))
     op.add_column('events', sa.Column('estimated_duration', sa.Integer, nullable=True))
     op.drop_column('events', 'planned_date')
+    op.create_table('users',
+                    sa.Column('id', sa.Integer(), nullable=False, autoincrement=True),
+                    sa.Column('username', sa.String(), nullable=False, unique=True),
+                    sa.Column('email', sa.String(), nullable=False, unique=True),
+                    sa.Column('_password', sa.String(), nullable=False),
+                    sa.PrimaryKeyConstraint('id')
+                    )
     # ### end Alembic commands ###
 
 

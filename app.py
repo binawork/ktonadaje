@@ -11,7 +11,7 @@ from flask import (
 )
 
 import config
-import decrypt_password as dp
+from flask.ext.bcrypt import Bcrypt
 from forms import AddEventForm, RegistrationForm
 
 
@@ -20,6 +20,7 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SECRET_KEY'] = 'you-will-never-guess'
 db = SQLAlchemy(app)
 moment = Moment(app)
+bcrypt = Bcrypt(app)
 
 from models import *
 
@@ -41,7 +42,9 @@ def add_event():
     """
     form = AddEventForm(request.form)
     available_categories = Category.query.order_by("title")
-    form.event_categories.choices = [(c.id, c.title) for c in available_categories]
+    form.event_categories.choices = [
+        (c.id, c.title) for c in available_categories
+    ]
     # POST: Add event
     if request.method == 'POST':
         if form.validate():
@@ -76,23 +79,13 @@ def edit_event(id: int):
     pass
 
 
-# @app.route('/register', methods = ['GET', 'POST'])
-# def register():
-#     if request.method == 'POST':
-#         request.form['']
-#         return redirect('index')
-#     else:
-#         return render_template('users/register_old.html',
-#                                 title='KtoNadaje',)
-
-
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm(request.form)
     if request.method == 'POST' and form.validate():
         user = User(username=form.username.data,
                     email=form.email.data,
-                    password=dp.password_hash(form.password.data)
+                    password=form.password.data
                     )
         db.session.add(user)
         db.session.commit()
