@@ -21,9 +21,6 @@ class Config(object):
     # Deploy on Heroku
     LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
 
-    # Bcrypt
-    BCRYPT_LOG_ROUNDS = 20
-
 
 class ProductionConfig(Config):
     DEBUG = False

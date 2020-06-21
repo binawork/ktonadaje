@@ -12,8 +12,10 @@ from flask import (
 )
 import config
 from flask_bcrypt import Bcrypt
+from sqlalchemy.exc import IntegrityError
 from forms import AddEventForm, RegistrationForm
 from models import *
+
 
 
 app = Flask(__name__)
@@ -87,12 +89,17 @@ def register():
                         email=form.email.data,
                         password=form.password.data
                         )
-            db.session.add(user)
-            db.session.commit()
-            flash('Registration succesfull')
-            return redirect(url_for('index'))
+            try:
+                db.session.add(user)
+                db.session.commit()
+                flash('Registration succesfull')
+                return redirect(url_for('index'))
+            except IntegrityError:
+                flash('Registration failed')
+                return redirect(url_for('register'))
         else:
-            return "<p>Error</p>"
+            flash('Registration failed')
+            return redirect(url_for('register'))
     return render_template('users/register.html', form=form)
 
 
