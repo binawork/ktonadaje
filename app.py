@@ -11,6 +11,7 @@ from flask import (
                     flash
 )
 import config
+import re
 from flask_bcrypt import Bcrypt
 from sqlalchemy.exc import IntegrityError
 from forms import AddEventForm, RegistrationForm
@@ -94,8 +95,10 @@ def register():
                 db.session.commit()
                 flash('Registration succesfull')
                 return redirect(url_for('index'))
-            except IntegrityError:
-                flash('Registration failed')
+            except IntegrityError as error:
+                error = re.sub(r"[^a-zA-Z0-9]", " ",
+                               error.args[0].split("DETAIL:")[1]).lstrip('eyK ')
+                flash(f'Registration failed: {error}')
                 return redirect(url_for('register'))
         else:
             flash('Registration failed')
