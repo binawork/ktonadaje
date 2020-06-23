@@ -2,25 +2,29 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_moment import Moment
 from flask import (
-                    Flask, 
-                    render_template, 
-                    url_for, 
-                    request, 
-                    redirect, 
+                    Flask,
+                    render_template,
+                    url_for,
+                    request,
+                    redirect,
                     make_response,
+                    flash
 )
-
 import config
-from forms import AddEventForm
+import re
+from flask_bcrypt import Bcrypt
+from sqlalchemy.exc import IntegrityError
+from forms import AddEventForm, RegistrationForm
+from models import *
+
 
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
-app.config['SECRET_KEY'] = 'you-will-never-guess'
+app.config['SECRET_KEY'] = os.urandom(32)
 db = SQLAlchemy(app)
 moment = Moment(app)
-
-from models import *
+bcrypt = Bcrypt(app)
 
 
 @app.route('/')
@@ -47,9 +51,9 @@ def add_event():
     if request.method == 'POST':
         if form.validate():
             new_event = Event(
-                title = form.event_title.data, 
-                host_name = form.host_name.data, 
-                url = form.event_link.data, 
+                title = form.event_title.data,
+                host_name = form.host_name.data,
+                url = form.event_link.data,
                 categories = Category.query.filter(
                     Category.id.in_(form.event_categories.data)).all(),
                 planned_start = form.start_datetime.data,
@@ -68,7 +72,7 @@ def add_event():
 
 
 @app.route('/edit-event/<int:id>', methods=('GET', 'POST', 'DELETE'))
-def edit_event(int: id):
+def edit_event(id: int):
     """
     may be helpful: 
     https://stackoverflow.com/questions/9885693/how-i-do-to-update-data-on-\
@@ -77,14 +81,30 @@ def edit_event(int: id):
     pass
 
 
-@app.route('/register', methods = ['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
+    form = RegistrationForm(request.form)
     if request.method == 'POST':
-        request.form['']
-        return redirect('index')
-    else:
-        return render_template('users/register.html',
-                                title='KtoNadaje',)
+        if form.validate():
+            user = User(username=form.username.data,
+                        email=form.email.data,
+                        password=form.password.data
+                        )
+            try:
+                db.session.add(user)
+                db.session.commit()
+                flash('Registration succesfull')
+                return redirect(url_for('index'))
+            except IntegrityError as error:
+                error = re.sub(r"[^a-zA-Z0-9]", " ",
+                               error.args[0].split("DETAIL:")[1]).lstrip('eyK ')
+                flash(f'Registration failed: {error}')
+                return redirect(url_for('register'))
+        else:
+            flash('Registration failed')
+            return redirect(url_for('register'))
+    return render_template('users/register.html', form=form)
+
 
 
 @app.route('/login', methods=['GET', 'POST'])

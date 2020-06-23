@@ -41,6 +41,13 @@ def upgrade():
     sa.ForeignKeyConstraint(['category_id'], ['categories.id'], ),
     sa.ForeignKeyConstraint(['event_id'], ['events.id'], )
     )
+    op.create_table('users',
+                    sa.Column('id', sa.Integer(), nullable=False, autoincrement=True),
+                    sa.Column('username', sa.String(), nullable=False, unique=True),
+                    sa.Column('email', sa.String(), nullable=False, unique=True),
+                    sa.Column('_password', sa.String(), nullable=False),
+                    sa.PrimaryKeyConstraint('id')
+                    )
     # ### end Alembic commands ###
 
 
