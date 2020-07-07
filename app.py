@@ -1,23 +1,21 @@
 import os
-from flask_sqlalchemy import SQLAlchemy
-from flask_moment import Moment
-from flask import (
-                    Flask,
-                    render_template,
-                    url_for,
-                    request,
-                    redirect,
-                    make_response,
-                    flash
-)
-import config
 import re
-from flask_bcrypt import Bcrypt
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
+from flask_moment import Moment
+from flask_bcrypt import Bcrypt
+from flask import (
+                Flask,
+                render_template,
+                url_for,
+                request,
+                redirect,
+                make_response,
+                flash,
+                )
+
+import config
 from forms import AddEventForm, RegistrationForm
-from models import *
-
-
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
@@ -25,6 +23,8 @@ app.config['SECRET_KEY'] = os.urandom(32)
 db = SQLAlchemy(app)
 moment = Moment(app)
 bcrypt = Bcrypt(app)
+
+from models import *
 
 
 @app.route('/')
@@ -97,7 +97,7 @@ def register():
                 return redirect(url_for('index'))
             except IntegrityError as error:
                 error = re.sub(r"[^a-zA-Z0-9]", " ",
-                               error.args[0].split("DETAIL:")[1]).lstrip('eyK ')
+                            error.args[0].split("DETAIL:")[1]).lstrip('eyK ')
                 flash(f'Registration failed: {error}')
                 return redirect(url_for('register'))
         else:
