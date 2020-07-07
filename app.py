@@ -27,7 +27,6 @@ import config
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SECRET_KEY'] = os.urandom(32)
-# app.secret_key = os.urandom(32)
 db = SQLAlchemy(app)
 moment = Moment(app)
 bcrypt = Bcrypt(app)
@@ -37,9 +36,7 @@ login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(id):
-    ret = User.get(id)
-    print(ret)
-    return ret
+    return User.get(id)
 
 
 @app.route('/')
@@ -103,7 +100,7 @@ def register():
         if form.validate():
             user = User(username=form.username.data,
                         email=form.email.data,
-                        password=form.password.data
+                        password=bcrypt.generate_password_hash(form.password.data)
                         )
             try:
                 db.session.add(user)
