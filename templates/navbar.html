@@ -22,7 +22,11 @@
                 <a class="nav-link" href="{{ url_for('add_event') }}">Dodaj</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="{{ url_for('login') }}">Zaloguj</a>
+            {% if current_user.is_authenticated %}
+                Zalogowany: {{ current_user.name }} <a class="nav-link" href="{{ url_for('logout') }}">Wyloguj</a>
+            {% else %}
+                <a class="nav-link" href="{{ url_for('login') }}">Zaloguj</a>
+            {% endif %}
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('register') }}">Dołącz do nas</a>

@@ -60,3 +60,14 @@ class RegistrationForm(Form):
     # accept_tos = BooleanField('I accept the TOS', [DataRequired()])
 
     submit = SubmitField("Register")
+
+
+class LoginForm(Form):
+    username = StringField('Username', [
+        DataRequired(message="This field is required."),
+        Length(min=3, max=25, message="Username must be 3-25 characters long.")
+    ])
+
+    password = PasswordField('Password', [DataRequired(),])
+
+    submit = SubmitField("Log in")

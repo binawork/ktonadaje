@@ -1,4 +1,7 @@
 import os
+import re
+import flask_login
+
 from flask_sqlalchemy import SQLAlchemy
 from flask_moment import Moment
 from flask import (
@@ -8,23 +11,35 @@ from flask import (
                     request,
                     redirect,
                     make_response,
-                    flash
+                    flash,
+                    abort
 )
-import config
-import re
+
+from is_safe_url import is_safe_url
 from flask_bcrypt import Bcrypt
 from sqlalchemy.exc import IntegrityError
-from forms import AddEventForm, RegistrationForm
+from forms import AddEventForm, RegistrationForm, LoginForm
 from models import *
 
+import config
 
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SECRET_KEY'] = os.urandom(32)
+# app.secret_key = os.urandom(32)
 db = SQLAlchemy(app)
 moment = Moment(app)
 bcrypt = Bcrypt(app)
+login_manager = flask_login.LoginManager()
+login_manager.init_app(app)
+
+
+@login_manager.user_loader
+def load_user(id):
+    ret = User.get(id)
+    print(ret)
+    return ret
 
 
 @app.route('/')
@@ -103,19 +118,47 @@ def register():
         else:
             flash('Registration failed')
             return redirect(url_for('register'))
-    return render_template('users/register.html', form=form)
 
+    return render_template('users/register.html', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    form = LoginForm(request.form)
     if request.method == 'POST':
-        return redirect('index')
-    else:
-        return render_template('users/login.html',
-                                title='KtoNadaje',)
+        if form.validate():
+            user = User.query.filter_by(username=form.username.data).first()
+            if user:
+                hash_password = user.password
+                given_password = form.password.data
+                if bcrypt.check_password_hash(hash_password, given_password):
+                    flask_login.login_user(user)
+                    flash('Logged in successfully.')
+                    next_page = request.args.get('next')
+                    if not is_safe_url(next_page, url_for('index', _external=True)):
+                        return abort(400)
+
+                    return redirect(next_page or url_for('index'))
+
+                else:
+                    flash('Login failed')
+                    return redirect(url_for('login'))
+            else:
+                flash('Login failed')
+                return redirect(url_for('login'))
+
+    return render_template('users/login.html', form=form)
 
 
+@flask_login.login_required
+@app.route('/logout', methods=['GET'])
+def logout():
+    flask_login.logout_user()
+    flash('Logged out')
+    return redirect(url_for('index'))
+
+
+# old routes
 @app.route('/services')
 def services_catalog():
     services = "usługi"

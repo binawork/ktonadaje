@@ -76,7 +76,7 @@ class User(db.Model):
 
     @password.setter
     def _set_password(self, password):
-        self._password = bcrypt.generate_password_hash(password)
+        self._password = bcrypt.generate_password_hash(password, rounds=12)
 
     def __init__(self, username, email, password):
         self.username = username
