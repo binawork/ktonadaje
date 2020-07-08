@@ -23,7 +23,7 @@
             </li>
             <li class="nav-item">
             {% if current_user.is_authenticated %}
-                Zalogowany: {{ current_user.name }} <a class="nav-link" href="{{ url_for('logout') }}">Wyloguj</a>
+                Zalogowany: {{ current_user.username }} <a class="nav-link" href="{{ url_for('logout') }}">Wyloguj</a>
             {% else %}
                 <a class="nav-link" href="{{ url_for('login') }}">Zaloguj</a>
             {% endif %}
@@ -34,6 +34,15 @@
         </ul>
     </div>
 </nav>
+
+<!-- this modal that shows Flask flash messages -->
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="modal-content">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="static/js/bootstrap.js"></script>

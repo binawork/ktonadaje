@@ -2,15 +2,6 @@
 {% from "_formhelper.html" import render_field %}
 
 {%  block content %}
-
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        {% for message in messages %}
-            <p>{{ message }}</p>
-        {% endfor %}
-    {% endif %}
-{% endwith %}
-
 <div class="container">
     <div class="text-center">
         <p class="h2">Zarejestruj się</p>
