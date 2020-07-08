@@ -70,15 +70,14 @@ class User(db.Model):
     username = db.Column(db.String(64), nullable=False, unique=True)
     email = db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.Binary, nullable=False)
-    authenticated = db.Column(db.Boolean, default=False)
     active = db.Column(db.Boolean, default=True)
 
     def is_active(self):
-        """True, as all users are active."""
+        """Return True if user is not deactivated"""
         return self.active
 
     def get_id(self):
-        """Return the email address to satisfy Flask-Login's requirements."""
+        """Return id"""
         return self.id
 
     def is_authenticated(self):
@@ -101,6 +100,7 @@ class User(db.Model):
         self.username = username
         self.email = email
         self.password = password
+        self.authenticated = False
 
     def __repr__(self):
         return "{}".format(self.username)

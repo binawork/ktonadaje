@@ -11,11 +11,9 @@ from flask import (
                     request,
                     redirect,
                     make_response,
-                    flash,
-                    abort
+                    flash
 )
 
-from is_safe_url import is_safe_url
 from flask_bcrypt import Bcrypt
 from sqlalchemy.exc import IntegrityError
 from forms import AddEventForm, RegistrationForm, LoginForm
@@ -39,6 +37,12 @@ def load_user(id):
     return User.query.get(id)
 
 
+@app.errorhandler(401)
+def error():
+    flash('You must be logged in to add events')
+    return redirect(url_for('index')), 401
+
+
 @app.route('/')
 @app.route('/home')
 @app.route('/events')
@@ -50,6 +54,7 @@ def index():
 
 
 @app.route('/add-event', methods=('GET', 'POST'))
+@flask_login.login_required
 def add_event():
     """
     Adding Events to database through the form on the webpage.
@@ -126,17 +131,12 @@ def login():
         if form.validate():
             user = User.query.filter_by(username=form.username.data).first()
             if user:
-                hash_password = user.password
-                given_password = form.password.data
-                if bcrypt.check_password_hash(hash_password, given_password):
-                    flask_login.login_user(user)
+                if bcrypt.check_password_hash(user.password, form.password.data):
+                    user.authenticated = True
+                    flask_login.login_user(user, remember=True)
                     flash('Logged in successfully.')
-                    next_page = request.args.get('next')
-                    # if not is_safe_url(next_page, url_for('index', _external=True)):
-                    #     print('To wszystko przez błędy')
-                    #     return abort(400)
 
-                    return redirect(next_page or url_for('index'))
+                    return redirect(url_for('index'))
 
                 else:
                     flash('Login failed')
@@ -148,12 +148,14 @@ def login():
     return render_template('users/login.html', form=form)
 
 
-@flask_login.login_required
 @app.route('/logout', methods=['GET'])
+@flask_login.login_required
 def logout():
+    user = flask_login.current_user
+    user.authenticated = False
     flask_login.logout_user()
     flash('Logged out')
-    return redirect(url_for('index'))
+    return redirect(request.referrer)
 
 
 # old routes
