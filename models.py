@@ -1,5 +1,6 @@
-from app import db, bcrypt
-from sqlalchemy.ext.hybrid import hybrid_property
+from app import db
+# from app import bcrypt
+# from sqlalchemy.ext.hybrid import hybrid_property
 
 
 events_categories_association = db.Table(
@@ -68,7 +69,25 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(64), nullable=False, unique=True)
     email = db.Column(db.String, nullable=False, unique=True)
-    _password = db.Column(db.Binary, nullable=False)
+    password = db.Column(db.Binary, nullable=False)
+    authenticated = db.Column(db.Boolean, default=False)
+    active = db.Column(db.Boolean, default=True)
+
+    def is_active(self):
+        """True, as all users are active."""
+        return self.active
+
+    def get_id(self):
+        """Return the email address to satisfy Flask-Login's requirements."""
+        return self.id
+
+    def is_authenticated(self):
+        """Return True if the user is authenticated."""
+        return self.authenticated
+
+    def is_anonymous(self):
+        """False, as anonymous users aren't supported."""
+        return False
 
     # @hybrid_property
     # def password(self):
@@ -81,7 +100,7 @@ class User(db.Model):
     def __init__(self, username, email, password):
         self.username = username
         self.email = email
-        self._password = password
+        self.password = password
 
     def __repr__(self):
         return "{}".format(self.username)

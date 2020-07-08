@@ -36,7 +36,7 @@ login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(id):
-    return User.get(id)
+    return User.query.get(id)
 
 
 @app.route('/')
@@ -132,8 +132,9 @@ def login():
                     flask_login.login_user(user)
                     flash('Logged in successfully.')
                     next_page = request.args.get('next')
-                    if not is_safe_url(next_page, url_for('index', _external=True)):
-                        return abort(400)
+                    # if not is_safe_url(next_page, url_for('index', _external=True)):
+                    #     print('To wszystko przez błędy')
+                    #     return abort(400)
 
                     return redirect(next_page or url_for('index'))
 
