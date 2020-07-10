@@ -17,10 +17,7 @@ from flask import (
 from flask_bcrypt import Bcrypt
 from sqlalchemy.exc import IntegrityError
 from forms import AddEventForm, RegistrationForm, LoginForm
-from models import *
-
 import config
-
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
@@ -31,6 +28,8 @@ bcrypt = Bcrypt(app)
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 
+from models import *
+
 
 @login_manager.user_loader
 def load_user(id):
@@ -38,9 +37,9 @@ def load_user(id):
 
 
 @app.errorhandler(401)
-def error():
+def not_logged_error(error):
     flash('You must be logged in to add events')
-    return redirect(url_for('index')), 401
+    return redirect(url_for('index'))
 
 
 @app.route('/')
