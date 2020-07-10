@@ -1,23 +1,21 @@
 import os
 import re
-import flask_login
-
 from flask_sqlalchemy import SQLAlchemy
-from flask_moment import Moment
-from flask import (
-                    Flask,
-                    render_template,
-                    url_for,
-                    request,
-                    redirect,
-                    make_response,
-                    flash
-)
-
-from flask_bcrypt import Bcrypt
 from sqlalchemy.exc import IntegrityError
-from forms import AddEventForm, RegistrationForm, LoginForm
+from flask_moment import Moment
+from flask_bcrypt import Bcrypt
+from flask import (
+                Flask,
+                render_template,
+                url_for,
+                request,
+                redirect,
+                make_response,
+                flash,
+                )
+
 import config
+from forms import AddEventForm, RegistrationForm
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
@@ -40,6 +38,8 @@ def load_user(id):
 def not_logged_error(error):
     flash('You must be logged in to add events')
     return redirect(url_for('index'))
+
+from models import *
 
 
 @app.route('/')
@@ -113,7 +113,7 @@ def register():
                 return redirect(url_for('index'))
             except IntegrityError as error:
                 error = re.sub(r"[^a-zA-Z0-9]", " ",
-                               error.args[0].split("DETAIL:")[1]).lstrip('eyK ')
+                            error.args[0].split("DETAIL:")[1]).lstrip('eyK ')
                 flash(f'Registration failed: {error}')
                 return redirect(url_for('register'))
         else:

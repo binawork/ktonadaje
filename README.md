@@ -1,6 +1,9 @@
 # KtoNadaje.pl  
 
-> Livestream and videochat aggregator  
+> Livestream and videochat aggregator
+
+## Quicklinks
+- [Current Sprint](https://github.com/binawork/ktonadaje/projects/3)
   
 ## Table of contents  
 
